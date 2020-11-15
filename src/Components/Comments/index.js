@@ -1,6 +1,6 @@
 import React from "react";
-import comments from "../../assets/css/comments.scss";
-function index() {
+
+const CommentSection = () => {
   return (
     <div className="comment-section">
       <div className="comment">
@@ -46,21 +46,4 @@ function index() {
   );
 }
 
-export default index;
-
-{
-  /* <div className="comment">
-<a className="comment-author">User123</a>
-<p className="comment-text">Very good movie!!</p>
-</div>
-
-<div>
-<textarea
-  placeholder="Write your comment here!"
-  class="pb-cmnt-textarea"
-></textarea>
-<button class="btn btn-primary pull-right" type="button">
-  Comment
-</button>
-</div> */
-}
+export default CommentSection;

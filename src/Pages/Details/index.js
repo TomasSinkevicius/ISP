@@ -8,7 +8,9 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { useHistory } from "react-router-dom";
-import Comments from "../Comments/index.js";
+
+import Comments from "../../Components/Comments/index.js";
+import Header from "../../Components/Header/header.jsx";
 
 const cards = [1, 2, 3, 4, 5, 6];
 
@@ -17,6 +19,7 @@ const DetailsScreen = (props) => {
 
   return (
     <div className="background-blur-wrapper">
+      <Header />
       <div className="movie-details-container">
         <div className="movie-details-content-container">
           <h1 className="movie-details-title">Movie title</h1>
@@ -37,7 +40,7 @@ const DetailsScreen = (props) => {
             officia deserunt mollit anim id est laborum.
           </p>
           <div className="movie-details-button-section">
-            <Button size="large" color="primary">
+            <Button size="large" color="primary" onClick={() => history.push(`/movie/playback/${1}`)} >
               Play
             </Button>
             <Button size="large" color="primary">

@@ -6,12 +6,13 @@ function Header() {
   return (
     <header className="header">
       <div className="header__top-nav">
-        <a class="header__top-nav-item">Apie mus</a>
-        <a class="header__top-nav-item">Filmai</a>
-        <a class="header__top-nav-item">Top filmai</a>
-        <a class="header__top-nav-item">Forumas</a>
+        <a class="header__top-nav-item" href="/">Filmai</a>
+        <a class="header__top-nav-item" href="/favorites/user1254689">Favoritai</a>
+        <a class="header__top-nav-item" href="/forum">Forumas</a>
         <figure className="header__top-nav-item user-profile-widget">
-          <img src={UserProfileWidget} alt="user profile" />
+          <a href='/account/user1254689'>
+            <img src={UserProfileWidget} alt="user profile" />
+          </a>
         </figure>
       </div>
     </header>
