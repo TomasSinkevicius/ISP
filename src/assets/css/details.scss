@@ -1,0 +1,55 @@
+$text-primary: white;
+
+.background-blur-wrapper {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)),
+		url('../images/placeholderbg.jpg');
+	min-height: 100vh;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.movie-details-container {
+	display: flex;
+	flex-direction: column;
+	padding-top: 240px;
+	padding-left: 48px;
+}
+.movie-details-content-container {
+	width: 50%;
+}
+.movie-details-title {
+	font-size: 48px;
+	color: $text-primary;
+}
+.movie-details-description {
+	font-size: 14px;
+	margin-top: 24px;
+	color: $text-primary;
+}
+.movie-details-button-section {
+	display: flex;
+	flex-direction: row;
+	margin-top: 24px;
+}
+.movie-details-related-section {
+	display: flex;
+	flex-direction: column;
+	margin-top: 64px;
+}
+.movie-details-title-secondary {
+	font-size: 36px;
+	color: $text-primary;
+	margin-bottom: 12px;
+}
+.movie-details-related-section-card {
+	display: flex;
+	flex-direction: column;
+	margin-right: 24px;
+	margin-bottom: 24px;
+}
+.movie-details-related-section-cardmedia {
+	padding-top: 56.25%;
+}
+.movie-details-related-section-cardcontent {
+	flex-grow: 1;
+}
