@@ -10,6 +10,7 @@ import './assets/css/footer.scss';
 import "./assets/css/comments.scss";
 import './assets/css/login.scss';
 import './assets/css/account.scss';
+import './assets/css/forum.scss';
 
 import HomeScreen from './Pages/Home';
 import FavoritesScreen from './Pages/Favorites';
@@ -18,6 +19,8 @@ import PlayerScreen from './Pages/Player'
 import LoginScreen from './Pages/Login';
 import RegisterScreen from './Pages/Register';
 import AccountScreen from './Pages/Account';
+import ForumScreen from './Pages/Forum';
+import ForumItemScreen from './Pages/ForumItem';
 
 const App = () => {
 
@@ -43,6 +46,20 @@ const App = () => {
 					path='/register'
 					component={(props) => (
 						<RegisterScreen {...props} />
+					)}
+				/>
+				<Route
+					exact
+					path='/forum'
+					component={(props) => (
+						<ForumScreen {...props} />
+					)}
+				/>
+				<Route
+					exact
+					path='/forum/:id'
+					component={(props) => (
+						<ForumItemScreen {...props} />
 					)}
 				/>
 				<Route

@@ -15,6 +15,7 @@ import Header from "../../Components/Header/header.jsx";
 const cards = [1, 2, 3, 4, 5, 6];
 
 const DetailsScreen = (props) => {
+  
   const history = useHistory();
 
   return (

@@ -1,0 +1,35 @@
+.forum-screen-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.forum-screen-title {
+	font-size: 48px;
+	margin-top: 48px;
+}
+.forum-screen-sections-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 16px;
+}
+.forum-screen-section {
+	margin: 24px 48px 24px 48px;
+	width: 50%;
+}
+.forum-section-title {
+	font-size: 24px;
+}
+.forum-section-description {
+	font-size: 12px;
+	margin-top: 12px;
+}
+.forum-section-link {
+	font-size: 16px;
+	margin-top: 12px;
+}
+.forum-section-link:hover {
+	opacity: 0.3;
+	cursor: pointer;
+}
