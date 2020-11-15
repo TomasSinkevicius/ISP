@@ -65,7 +65,6 @@ const useStyles = makeStyles((theme) => ({
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Album() {
-
   const history = useHistory();
   const classes = useStyles();
 
@@ -95,7 +94,11 @@ export default function Album() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button onClick={() => history.push(`/movie/${index}`)} size="small" color="primary">
+                    <Button
+                      onClick={() => history.push(`/movie/${index}`)}
+                      size="small"
+                      color="primary"
+                    >
                       View
                     </Button>
                     <Button size="small" color="primary">
