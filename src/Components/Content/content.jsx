@@ -1,6 +1,4 @@
 import React from "react";
-import "../../App.scss";
-import "./content.scss";
 
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";

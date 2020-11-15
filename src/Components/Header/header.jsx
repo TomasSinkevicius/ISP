@@ -1,7 +1,6 @@
 import React from "react";
 import NotificationBell from "../../assets/images/breadcrumb-separator.svg";
 import UserProfileWidget from "../../assets/images/placeholder-profile.jpg";
-import "./header.scss";
 
 function Header() {
   return (
