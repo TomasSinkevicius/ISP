@@ -1,33 +1,36 @@
 import React from 'react';
 
-import Header from "../../Components/Header/header.jsx";
+import Header from '../../Components/Header/header.js';
 
 const AccountScreen = () => {
-    return(
-        <div>
-            <Header />
-            <div className='account-screen-container'>
-                <h1 className='account-screen-title'>Account details</h1>
-                <div className='account-screen-info-container'>
-                    <div className='account-info-holder'>
-                        <h3 className='account-info-title'>Email: </h3>
-                        <p className='account-info-content'>user@user.lt</p>
-                    </div>
-                    <div className='account-info-holder'>
-                        <h3 className='account-info-title'>User points: </h3>
-                        <p className='account-info-content'>564</p>
-                    </div>
-                    <div className='account-info-holder'>
-                        <h3 className='account-info-title'>User status: </h3>
-                        <p className='account-info-content'>VIP</p>
-                    </div>
-                    <div className='account-info-holder' onClick={() => console.log('sign out')}>
-                        <h3 className='account-info-signout'>Sign out</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
+	return (
+		<div>
+			<Header />
+			<div className='account-screen-container'>
+				<h1 className='account-screen-title'>Account details</h1>
+				<div className='account-screen-info-container'>
+					<div className='account-info-holder'>
+						<h3 className='account-info-title'>Email: </h3>
+						<p className='account-info-content'>user@user.lt</p>
+					</div>
+					<div className='account-info-holder'>
+						<h3 className='account-info-title'>User points: </h3>
+						<p className='account-info-content'>564</p>
+					</div>
+					<div className='account-info-holder'>
+						<h3 className='account-info-title'>User status: </h3>
+						<p className='account-info-content'>VIP</p>
+					</div>
+					<div
+						className='account-info-holder'
+						onClick={() => console.log('sign out')}
+					>
+						<h3 className='account-info-signout'>Sign out</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+};
 
 export default AccountScreen;
