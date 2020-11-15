@@ -1,0 +1,27 @@
+.login-screen-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.login-screen-title {
+	font-size: 48px;
+	margin-top: 48px;
+}
+.auth-input {
+	margin-top: 24px;
+	height: 24px;
+	width: 240px;
+	padding: 6px 12px 6px 12px;
+}
+.auth-primary-button {
+	margin-top: 24px;
+	padding: 12px 24px 12px 24px;
+}
+.auth-link {
+	margin-top: 24px;
+	text-decoration: none;
+}
+.auth-link:hover {
+	opacity: 0.3;
+}

@@ -8,11 +8,16 @@ import './assets/css/content.scss';
 import './assets/css/header.scss';
 import './assets/css/footer.scss';
 import "./assets/css/comments.scss";
+import './assets/css/login.scss';
+import './assets/css/account.scss';
 
 import HomeScreen from './Pages/Home';
 import FavoritesScreen from './Pages/Favorites';
 import DetailsScreen from './Pages/Details';
 import PlayerScreen from './Pages/Player'
+import LoginScreen from './Pages/Login';
+import RegisterScreen from './Pages/Register';
+import AccountScreen from './Pages/Account';
 
 const App = () => {
 
@@ -24,6 +29,27 @@ const App = () => {
 					path='/'
 					component={(props) => (
 						<HomeScreen {...props} />
+					)}
+				/>
+				<Route
+					exact
+					path='/login'
+					component={(props) => (
+						<LoginScreen {...props} />
+					)}
+				/>
+				<Route
+					exact
+					path='/register'
+					component={(props) => (
+						<RegisterScreen {...props} />
+					)}
+				/>
+				<Route
+					exact
+					path='/account/:id'
+					component={(props) => (
+						<AccountScreen {...props} />
 					)}
 				/>
 				<Route
