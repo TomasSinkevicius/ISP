@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 
 import { useFirebase } from '../../Context/firebase/FirebaseContext';
 
-const RegisterScreen = () => {
+const RegisterScreen = (props) => {
+	const { history } = props;
 	const { register } = useFirebase();
 
 	const [userData, setUserData] = useState({
@@ -18,7 +19,7 @@ const RegisterScreen = () => {
 	const onSubmitPress = () => {
 		if (userData.email !== '' && userData.password !== '') {
 			if (userData.password === userData.repeatedPassword) {
-				register(userData.email, userData.password);
+				register(userData.email, userData.password, history);
 				// TODO - render firebase response
 			}
 		}

@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 
-const LoginScreen = () => {
+import { useFirebase } from '../../Context/firebase/FirebaseContext';
+
+const LoginScreen = (props) => {
+	const { history } = props;
+	const { login } = useFirebase();
+
 	const [userData, setUserData] = useState({
 		email: '',
 		password: '',
@@ -11,7 +16,10 @@ const LoginScreen = () => {
 	};
 
 	const onSubmitPress = () => {
-		console.log(userData);
+		if (userData.email !== '' && userData.password !== '') {
+			login(userData.email, userData.password, history);
+			// TODO - render firebase response
+		}
 	};
 	return (
 		<div className='login-screen-container'>

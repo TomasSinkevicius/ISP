@@ -6,13 +6,13 @@ function Header() {
 	return (
 		<header className='header'>
 			<div className='header__top-nav'>
-				<a class='header__top-nav-item' href='/'>
+				<a className='header__top-nav-item' href='/'>
 					Filmai
 				</a>
-				<a class='header__top-nav-item' href='/favorites/user1254689'>
+				<a className='header__top-nav-item' href='/favorites/user1254689'>
 					Favoritai
 				</a>
-				<a class='header__top-nav-item' href='/forum'>
+				<a className='header__top-nav-item' href='/forum'>
 					Forumas
 				</a>
 				<figure className='header__top-nav-item user-profile-widget'>

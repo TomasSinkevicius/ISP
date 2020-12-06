@@ -2,7 +2,11 @@ import React from 'react';
 
 import Header from '../../Components/Header/header.js';
 
-const AccountScreen = () => {
+import { useFirebase } from '../../Context/firebase/FirebaseContext.js';
+
+const AccountScreen = (props) => {
+	const { history } = props;
+	const { logout } = useFirebase();
 	return (
 		<div>
 			<Header />
@@ -21,10 +25,7 @@ const AccountScreen = () => {
 						<h3 className='account-info-title'>User status: </h3>
 						<p className='account-info-content'>VIP</p>
 					</div>
-					<div
-						className='account-info-holder'
-						onClick={() => console.log('sign out')}
-					>
+					<div className='account-info-holder' onClick={() => logout(history)}>
 						<h3 className='account-info-signout'>Sign out</h3>
 					</div>
 				</div>

@@ -36,13 +36,34 @@ const FirebaseProvider = ({ children }) => {
 
 	const register = (email, password, history) => {
 		const reg = auth.createUserWithEmailAndPassword(email, password);
-		reg.catch((e) => console.log(e.message));
+		reg.catch((e) => {
+			return e.message;
+		});
 		auth.onAuthStateChanged((firebaseUser) => {
 			if (firebaseUser) {
 				setUser(firebaseUser);
 				history.push('/');
 			}
 		});
+	};
+
+	const login = (email, password, history) => {
+		const log = auth.signInWithEmailAndPassword(email, password);
+		log.catch((e) => {
+			return e.message;
+		});
+		auth.onAuthStateChanged((firebaseUser) => {
+			if (firebaseUser) {
+				setUser(firebaseUser);
+				history.push('/');
+			}
+		});
+	};
+
+	const logout = (history) => {
+		auth.signOut();
+		setUser(null);
+		history.push('/');
 	};
 
 	useEffect(() => {
@@ -61,6 +82,8 @@ const FirebaseProvider = ({ children }) => {
 		<FirebaseContext.Provider
 			value={{
 				register,
+				login,
+				logout,
 				loading,
 				user,
 			}}
