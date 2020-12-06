@@ -2,6 +2,8 @@ import React from 'react';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+import FirebaseProvider from './Context/firebase/FirebaseProvider';
+
 import './assets/css/home.scss';
 import './assets/css/details.scss';
 import './assets/css/content.scss';
@@ -76,4 +78,10 @@ const App = () => {
 	);
 };
 
-export default App;
+const WrappedApp = () => (
+	<FirebaseProvider>
+		<App />
+	</FirebaseProvider>
+);
+
+export default WrappedApp;

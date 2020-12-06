@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
+import { useFirebase } from '../../Context/firebase/FirebaseContext';
+
 const RegisterScreen = () => {
+	const { register } = useFirebase();
+
 	const [userData, setUserData] = useState({
 		email: '',
 		password: '',
@@ -12,7 +16,12 @@ const RegisterScreen = () => {
 	};
 
 	const onSubmitPress = () => {
-		console.log(userData);
+		if (userData.email !== '' && userData.password !== '') {
+			if (userData.password === userData.repeatedPassword) {
+				register(userData.email, userData.password);
+				// TODO - render firebase response
+			}
+		}
 	};
 	return (
 		<div className='login-screen-container'>
