@@ -19,29 +19,45 @@ let connection;
 
 const getConnection = () => {
 	if (!connection) {
-		// TODO - fix initialize on refresh
-		connection = firebase.initializeApp(firebaseConfig);
+		if (firebase.apps.length === 0) {
+			connection = firebase.initializeApp(firebaseConfig);
+		}
 	}
 	return connection;
 };
 
 getConnection();
 
-// const database = getConnection().firestore();
+const database = getConnection().firestore();
 const auth = getConnection().auth();
 
 const FirebaseProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
 	const [loading, setLoading] = useState(true);
 
+	const getUserObject = async (response) => {
+		let userDoc = await database.collection('users').get();
+		userDoc = userDoc.docs.filter((doc) => doc.data().uid === response.uid);
+		return userDoc[0]?.data();
+	};
+
 	const register = (email, password, history) => {
 		const reg = auth.createUserWithEmailAndPassword(email, password);
 		reg.catch((e) => {
 			return e.message;
 		});
-		auth.onAuthStateChanged((firebaseUser) => {
+		auth.onAuthStateChanged(async (firebaseUser) => {
 			if (firebaseUser) {
-				setUser(firebaseUser);
+				const { uid, email } = firebaseUser;
+				const userObj = {
+					uid,
+					email,
+					type: 'user',
+					points: 2,
+					favorites: [],
+				};
+				await database.collection('users').doc(uid).set(userObj);
+				setUser(userObj);
 				history.push('/');
 			}
 		});
@@ -52,9 +68,10 @@ const FirebaseProvider = ({ children }) => {
 		log.catch((e) => {
 			return e.message;
 		});
-		auth.onAuthStateChanged((firebaseUser) => {
+		auth.onAuthStateChanged(async (firebaseUser) => {
 			if (firebaseUser) {
-				setUser(firebaseUser);
+				const userData = await getUserObject(firebaseUser);
+				setUser(userData);
 				history.push('/');
 			}
 		});
@@ -67,16 +84,15 @@ const FirebaseProvider = ({ children }) => {
 	};
 
 	useEffect(() => {
-		const unsubscribe = app.auth().onAuthStateChanged((res) => {
-			console.log('user res', res);
-			if (res !== user) {
-				setUser(res);
+		const unsubscribe = app.auth().onAuthStateChanged(async (firebaseUser) => {
+			if (firebaseUser !== user) {
+				const userData = await getUserObject(firebaseUser);
+				setUser(userData);
 				setLoading(false);
 			}
 		});
-
 		return unsubscribe;
-	});
+	}, []);
 
 	return (
 		<FirebaseContext.Provider
