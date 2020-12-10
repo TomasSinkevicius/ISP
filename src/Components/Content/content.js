@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import { useFirebase } from '../../Context/firebase/FirebaseContext';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -45,13 +46,25 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 export default function Album() {
+	const [loading, setLoading] = useState(true);
+	const [data, setData] = useState([]);
+
 	const history = useHistory();
 	const classes = useStyles();
+	const { getAllMovies } = useFirebase();
 
-	return (
+	useEffect(() => {
+		const fetchData = async () => {
+			const res = await getAllMovies();
+			setData(res);
+			setLoading(false);
+		};
+		fetchData();
+	}, []);
+
+	// display a loader if u want to
+	return loading ? null : (
 		<React.Fragment>
 			<CssBaseline />
 			<main>
@@ -59,26 +72,22 @@ export default function Album() {
 				<Container className={classes.cardGrid} maxWidth='md'>
 					{/* End hero unit */}
 					<Grid container spacing={4}>
-						{cards.map((card, index) => (
-							<Grid item key={card} xs={12} sm={6} md={4}>
+						{data.map((item, index) => (
+							<Grid item key={item.id} xs={12} sm={6} md={4}>
 								<Card className={classes.card}>
 									<CardMedia
 										className={classes.cardMedia}
-										image='https://source.unsplash.com/random'
-										title='Image title'
+										image={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
+										title='img'
 									/>
 									<CardContent className={classes.cardContent}>
 										<Typography gutterBottom variant='h5' component='h2'>
-											Heading
-										</Typography>
-										<Typography>
-											This is a media card. You can use this section to describe
-											the content.
+											{item.title}
 										</Typography>
 									</CardContent>
 									<CardActions>
 										<Button
-											onClick={() => history.push(`/movie/${index}`)}
+											onClick={() => history.push(`/movie/${item.id}`)}
 											size='small'
 											color='primary'
 										>

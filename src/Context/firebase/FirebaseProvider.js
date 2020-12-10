@@ -31,9 +31,42 @@ getConnection();
 const database = getConnection().firestore();
 const auth = getConnection().auth();
 
+const BASE_URL = 'https://api.themoviedb.org/3';
+const API_KEY = '9605aec422629ad892b8117a42723abc';
+
+const provider = async () => {
+	let data = [];
+	const url = `${BASE_URL}/movie/top_rated?api_key=${API_KEY}`;
+
+	await fetch(url)
+		.then((res) => res.json())
+		.then((dataRes) => (data = [...dataRes.results]));
+
+	return data;
+};
+
 const FirebaseProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
-	const [loading, setLoading] = useState(true);
+	const [userLoading, setUserLoading] = useState(true);
+
+	const getMovie = async (id) => {
+		let dataDoc = await database.collection('movies').get();
+		dataDoc = dataDoc.docs.filter((doc) => doc.data().id === id);
+		return dataDoc[0]?.data();
+	};
+
+	const setMovie = async (id, movie) => {
+		await database.collection('movies').doc(id).set(movie);
+	};
+
+	const getAllMovies = async () => {
+		let data = [];
+		let dataDoc = await database.collection('movies').get();
+		dataDoc.docs.map((doc) => (data = [...data, doc.data()]));
+		return data;
+	};
+
+	const removeMovie = async (id) => {};
 
 	const getUserObject = async (response) => {
 		let userDoc = await database.collection('users').get();
@@ -88,7 +121,7 @@ const FirebaseProvider = ({ children }) => {
 			if (firebaseUser !== user) {
 				const userData = await getUserObject(firebaseUser);
 				setUser(userData);
-				setLoading(false);
+				setUserLoading(false);
 			}
 		});
 		return unsubscribe;
@@ -100,8 +133,12 @@ const FirebaseProvider = ({ children }) => {
 				register,
 				login,
 				logout,
-				loading,
+				userLoading,
 				user,
+				getMovie,
+				setMovie,
+				getAllMovies,
+				removeMovie,
 			}}
 		>
 			{children}

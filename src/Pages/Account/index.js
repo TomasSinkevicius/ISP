@@ -6,8 +6,8 @@ import { useFirebase } from '../../Context/firebase/FirebaseContext.js';
 
 const AccountScreen = (props) => {
 	const { history } = props;
-	const { logout, user, loading } = useFirebase();
-	return loading ? null : (
+	const { logout, user, userLoading } = useFirebase();
+	return userLoading ? null : (
 		<div>
 			<Header />
 			<div className='account-screen-container'>

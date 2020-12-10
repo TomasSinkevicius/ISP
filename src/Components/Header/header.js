@@ -5,7 +5,7 @@ import { useFirebase } from '../../Context/firebase/FirebaseContext';
 import UserProfileWidget from '../../assets/images/placeholder-profile.jpg';
 
 const Header = () => {
-	const { user, loading } = useFirebase();
+	const { user, userLoading } = useFirebase();
 
 	const UserHeader = () => (
 		<div className='header__top-nav'>
@@ -39,7 +39,7 @@ const Header = () => {
 
 	return (
 		<header className='header'>
-			{loading ? null : user ? <UserHeader /> : <GuestHeader />}
+			{userLoading ? null : user ? <UserHeader /> : <GuestHeader />}
 		</header>
 	);
 };
