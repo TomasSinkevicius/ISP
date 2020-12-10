@@ -34,13 +34,24 @@ const auth = getConnection().auth();
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = '9605aec422629ad892b8117a42723abc';
 
-const provider = async () => {
+const dataProvider = async () => {
 	let data = [];
 	const url = `${BASE_URL}/movie/top_rated?api_key=${API_KEY}`;
 
 	await fetch(url)
 		.then((res) => res.json())
 		.then((dataRes) => (data = [...dataRes.results]));
+
+	return data;
+};
+
+const videoProvider = async (id) => {
+	let data = {};
+	const url = `${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}`;
+
+	await fetch(url)
+		.then((res) => res.json())
+		.then((dataRes) => (data = dataRes));
 
 	return data;
 };
@@ -55,8 +66,23 @@ const FirebaseProvider = ({ children }) => {
 		return dataDoc[0]?.data();
 	};
 
+	const getMedia = async (item) => {
+		let videoRes = await videoProvider(item.id);
+		videoRes = videoRes?.results?.find((item) => item.type === 'Trailer');
+		if (videoRes?.key && item?.poster_path && item?.backdrop_path) {
+			videoRes = `https://www.youtube.com/watch?v=${videoRes?.key}`;
+			const posterRes = `https://image.tmdb.org/t/p/w500${item?.poster_path}`;
+			const backdropRes = `https://image.tmdb.org/t/p/w500${item?.backdrop_path}`;
+			return { trailer: videoRes, poster: posterRes, backdrop: backdropRes };
+		} else return null;
+	};
+
 	const setMovie = async (id, movie) => {
-		await database.collection('movies').doc(id).set(movie);
+		let media = await getMedia(movie);
+		if (media) {
+			let movieObj = { ...movie, ...media };
+			await database.collection('movies').doc(`${id}`).set(movieObj);
+		} else return;
 	};
 
 	const getAllMovies = async () => {

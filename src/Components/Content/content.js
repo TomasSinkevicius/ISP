@@ -77,7 +77,7 @@ export default function Album() {
 								<Card className={classes.card}>
 									<CardMedia
 										className={classes.cardMedia}
-										image={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
+										image={item.poster}
 										title='img'
 									/>
 									<CardContent className={classes.cardContent}>
