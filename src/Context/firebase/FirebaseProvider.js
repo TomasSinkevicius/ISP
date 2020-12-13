@@ -147,8 +147,8 @@ const FirebaseProvider = ({ children }) => {
 			if (firebaseUser !== user) {
 				const userData = await getUserObject(firebaseUser);
 				setUser(userData);
-				setUserLoading(false);
 			}
+			setUserLoading(false);
 		});
 		return unsubscribe;
 	}, []);
