@@ -92,6 +92,13 @@ const FirebaseProvider = ({ children }) => {
 		return data;
 	};
 
+	const setMembership = async () => {
+		let data = [];
+		let dataDoc = await database.collection('membership').get();
+		dataDoc.docs.map((doc) => (data = [...data, doc.data()]));
+		return data;
+	}
+
 	const removeMovie = async (id) => {};
 
 	const getUserObject = async (response) => {
@@ -166,6 +173,7 @@ const FirebaseProvider = ({ children }) => {
 				setMovie,
 				getAllMovies,
 				removeMovie,
+				setMembership,
 			}}
 		>
 			{children}
