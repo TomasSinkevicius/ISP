@@ -23,6 +23,10 @@ import RegisterScreen from './Pages/Register';
 import AccountScreen from './Pages/Account';
 import ForumScreen from './Pages/Forum';
 import ForumItemScreen from './Pages/ForumItem';
+import MembeshipScreen	from './Pages/MembershipPurchase';
+import PointsScreen from './Pages/PointsPurchase';
+import AddDataScreen from './Pages/AddData';
+import EditDataScreen from './Pages/EditData';
 
 const App = () => {
 	return (
@@ -72,7 +76,33 @@ const App = () => {
 					exact
 					path='/movie/playback/:id'
 					component={(props) => <PlayerScreen {...props} />}
+				/>	
+				<Route
+					exact
+					path='/naryste/:id'
+					component={(props) => <MembeshipScreen	 {...props} />}
+				/>	
+				<Route
+					exact
+					path='/naryste/:id'
+					component={(props) => <MembeshipScreen	 {...props} />}
+				/>		
+				<Route
+					exact
+					path='/taskai/:id'
+					component={(props) => <PointsScreen	 {...props} />}
 				/>
+				<Route
+					exact
+					path='/addData/:id'
+					component={(props) => <AddDataScreen	 {...props} />}
+				/>
+				<Route
+					exact
+					path='/editData/:id'
+					component={(props) => <EditDataScreen	 {...props} />}
+				/>
+				EditDataScreen
 			</Switch>
 		</Router>
 	);

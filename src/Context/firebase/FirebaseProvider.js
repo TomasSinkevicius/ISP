@@ -114,6 +114,7 @@ const FirebaseProvider = ({ children }) => {
 					type: 'user',
 					points: 2,
 					favorites: [],
+					membership: 'paprasta',
 				};
 				await database.collection('users').doc(uid).set(userObj);
 				setUser(userObj);
