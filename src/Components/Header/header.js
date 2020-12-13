@@ -9,6 +9,12 @@ const Header = () => {
 
 	const UserHeader = () => (
 		<div className='header__top-nav'>
+			<a className='header__top-nav-item' href={`/naryste/${user.uid}`}>
+				Narystės pirkimas
+			</a>
+			<a className='header__top-nav-item' href={`/taskai/${user.uid}`}>
+				Taškų pirkimas
+			</a>
 			<a className='header__top-nav-item' href='/'>
 				Filmai
 			</a>
