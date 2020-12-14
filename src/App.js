@@ -27,6 +27,7 @@ import MembeshipScreen	from './Pages/MembershipPurchase';
 import PointsScreen from './Pages/PointsPurchase';
 import AddDataScreen from './Pages/AddData';
 import EditDataScreen from './Pages/EditData';
+import Admin from './Pages/Admin'
 
 const App = () => {
 	return (
@@ -101,6 +102,11 @@ const App = () => {
 					exact
 					path='/editData/:id'
 					component={(props) => <EditDataScreen	 {...props} />}
+				/>
+				<Route
+					exact
+					path='/admin'
+					component={(props) => <Admin	 {...props} />}
 				/>
 				EditDataScreen
 			</Switch>
