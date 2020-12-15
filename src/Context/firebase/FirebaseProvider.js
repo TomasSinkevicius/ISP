@@ -139,7 +139,16 @@ const FirebaseProvider = ({ children }) => {
 	const getUserObject = async (response) => {
 		let userDoc = await database.collection('users').get();
 		userDoc = userDoc.docs.filter((doc) => doc.data().uid === response.uid);
-		return userDoc[0]?.data();
+
+		let userObj = userDoc[0]?.data();
+		const today = new Date().toLocaleDateString();
+
+		if (today !== userObj.timestamp) {
+			userObj = { ...userObj, timestamp: today, points: userObj.points + 2 };
+			await database.collection('users').doc(userObj.uid).set(userObj);
+		}
+
+		return userObj;
 	};
 
 	const addToFavorites = async (id) => {};
