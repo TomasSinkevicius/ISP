@@ -73,7 +73,20 @@ const FirebaseProvider = ({ children }) => {
 			videoRes = `https://www.youtube.com/watch?v=${videoRes?.key}`;
 			const posterRes = `https://image.tmdb.org/t/p/w500${item?.poster_path}`;
 			const backdropRes = `https://image.tmdb.org/t/p/w500${item?.backdrop_path}`;
-			return { trailer: videoRes, poster: posterRes, backdrop: backdropRes };
+			let movieCost = 0;
+			if (item?.vote_count < 1000) {
+				movieCost = 1;
+			} else if (item?.vote_count < 10000) {
+				movieCost = 3;
+			} else {
+				movieCost = 5;
+			}
+			return {
+				trailer: videoRes,
+				poster: posterRes,
+				backdrop: backdropRes,
+				movieCost,
+			};
 		} else return null;
 	};
 
@@ -103,11 +116,22 @@ const FirebaseProvider = ({ children }) => {
 		return data;
 	};
 
-	const setMembership = async () => {
-		let data = [];
-		let dataDoc = await database.collection('membership').get();
-		dataDoc.docs.map((doc) => (data = [...data, doc.data()]));
-		return data;
+	const setMembership = async (membership) => {
+		const userObj = { ...user, membership: membership };
+		await database.collection('users').doc(`${user.uid}`).set(userObj);
+		setUser(userObj);
+	};
+
+	const addUserPoints = async (points) => {
+		const userObj = { ...user, points: user.points + points };
+		await database.collection('users').doc(`${user.uid}`).set(userObj);
+		setUser(userObj);
+	};
+
+	const removeUserPoints = async (points) => {
+		const userObj = { ...user, points: user.points - points };
+		await database.collection('users').doc(`${user.uid}`).set(userObj);
+		setUser(userObj);
 	};
 
 	const removeMovie = async (id) => {};
@@ -117,6 +141,10 @@ const FirebaseProvider = ({ children }) => {
 		userDoc = userDoc.docs.filter((doc) => doc.data().uid === response.uid);
 		return userDoc[0]?.data();
 	};
+
+	const addToFavorites = async (id) => {};
+
+	const removeFromFavorites = async (id) => {};
 
 	const register = (email, password, history) => {
 		const reg = auth.createUserWithEmailAndPassword(email, password);
@@ -180,6 +208,10 @@ const FirebaseProvider = ({ children }) => {
 				logout,
 				userLoading,
 				user,
+				addUserPoints,
+				removeUserPoints,
+				addToFavorites,
+				removeFromFavorites,
 				getMovie,
 				setMovie,
 				getAllMovies,

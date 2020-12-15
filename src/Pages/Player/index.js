@@ -25,8 +25,6 @@ const PlayerScreen = (props) => {
 		fetchData();
 	}, []);
 
-	console.log(trailer);
-
 	// hacked player
 	if (!loading)
 		document.getElementById(

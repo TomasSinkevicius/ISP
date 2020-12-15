@@ -5,11 +5,12 @@ import Header from '../../Components/Header/header.js';
 
 const PointsScreen = (props) => {
 	const { history } = props;
-	const { logout, user, userLoading } = useFirebase();
+	const { user, userLoading, addUserPoints } = useFirebase();
 
-	function addPoints() {
-		alert('Taškai pridėti!');
-	  }
+	const addPoints = (ammount) => {
+		addUserPoints(ammount);
+		history.push(`/account/${user.uid}`);
+	};
 
 	return userLoading ? null : (
 		<div>
@@ -21,27 +22,46 @@ const PointsScreen = (props) => {
 						<h3 className='account-info-title'>Taškų likutis :</h3>
 						<p className='account-info-content'>{user.points}</p>
 					</div>
-					
 				</div>
 			</div>
 			<div className='account-screen-container'>
-			<h1 className='membership-purchase'>Galimos taškų pirkimo sumos</h1>
-					<div className='account-info-holder'>
-						<h3 className='account-info-title'>Nusipirkti 25 taškus ---{'>'} </h3>
-						<button on onClick={addPoints} className='membership-info-content'>Pirkti</button>
-					</div>
-					<div className='account-info-holder'>
-						<h3 className='account-info-title'>Nusipirkti 50 taškų ---{'>'} </h3>
-						<button on onClick={addPoints} className='membership-info-content'>Pirkti</button>
-					</div>
-					<div className='account-info-holder'>
-						<h3 className='account-info-title'>Nusipirkti 100 taškų ---{'>'} </h3>
-						<button on onClick={addPoints} className='membership-info-content'>Pirkti</button>
-					</div>
-					<div className='account-info-holder'>
-						<h3 className='account-info-title'>Nusipirkti 200 taškų ---{'>'} </h3>
-						<button on onClick={addPoints} className='membership-info-content'>Pirkti</button>
-					</div>
+				<h1 className='membership-purchase'>Galimos taškų pirkimo sumos</h1>
+				<div className='account-info-holder'>
+					<h3 className='account-info-title'>Nusipirkti 25 taškus ---{'>'} </h3>
+					<button
+						onClick={() => addPoints(25)}
+						className='membership-info-content'
+					>
+						Pirkti
+					</button>
+				</div>
+				<div className='account-info-holder'>
+					<h3 className='account-info-title'>Nusipirkti 50 taškų ---{'>'} </h3>
+					<button
+						onClick={() => addPoints(50)}
+						className='membership-info-content'
+					>
+						Pirkti
+					</button>
+				</div>
+				<div className='account-info-holder'>
+					<h3 className='account-info-title'>Nusipirkti 100 taškų ---{'>'} </h3>
+					<button
+						onClick={() => addPoints(100)}
+						className='membership-info-content'
+					>
+						Pirkti
+					</button>
+				</div>
+				<div className='account-info-holder'>
+					<h3 className='account-info-title'>Nusipirkti 200 taškų ---{'>'} </h3>
+					<button
+						onClick={() => addPoints(200)}
+						className='membership-info-content'
+					>
+						Pirkti
+					</button>
+				</div>
 			</div>
 		</div>
 	);

@@ -3,23 +3,18 @@ import React from 'react';
 import Header from '../../Components/Header/header.js';
 
 import { useFirebase } from '../../Context/firebase/FirebaseContext.js';
-import { useHistory } from "react-router-dom";
 
 const AccountScreen = (props) => {
 	const { history } = props;
 	const { logout, user, userLoading } = useFirebase();
 
-	const direction = useHistory();
+	const routeChangeAdd = () => {
+		history.push(`../../addData/${user.uid}`);
+	};
 
-	const routeChangeAdd = () =>{ 
-		let path = `../../addData/:id`; 
-		direction.push(path);
-	  }
-
-	const routeChangeEdit = () =>{ 
-		let path = `../../editData/:id`; 
-		direction.push(path);
-	  }
+	const routeChangeEdit = () => {
+		history.push(`../../editData/${user.uid}`);
+	};
 
 	return userLoading ? null : (
 		<div>

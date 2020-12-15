@@ -17,7 +17,12 @@ import { useFirebase } from '../../Context/firebase/FirebaseContext';
 const DetailsScreen = (props) => {
 	const { match, location } = props;
 	const history = useHistory();
-	const { getMovie, getRecommendedMovies } = useFirebase();
+	const {
+		getMovie,
+		getRecommendedMovies,
+		user,
+		removeUserPoints,
+	} = useFirebase();
 
 	const [asset, setAsset] = useState({});
 	const [recommended, setRecommended] = useState([]);
@@ -50,7 +55,16 @@ const DetailsScreen = (props) => {
 						<Button
 							size='large'
 							color='primary'
-							onClick={() => history.push(`/movie/playback/${asset.id}`)}
+							onClick={() => {
+								if (
+									user?.points >= asset?.movieCost ||
+									user?.membership === 'VIP'
+								) {
+									history.push(`/movie/playback/${asset.id}`);
+									if (user?.membership !== 'VIP')
+										removeUserPoints(asset.movieCost);
+								} else alert('You dont have enough points to watch this movie');
+							}}
 						>
 							Play
 						</Button>
