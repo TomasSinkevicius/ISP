@@ -1,8 +1,6 @@
 $text-primary: white;
 
 .background-blur-wrapper {
-	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)),
-		url('../images/placeholderbg.jpg');
 	min-height: 100vh;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -46,6 +44,7 @@ $text-primary: white;
 	flex-direction: column;
 	margin-right: 24px;
 	margin-bottom: 24px;
+	width: 345px;
 }
 .movie-details-related-section-cardmedia {
 	height: 200px;

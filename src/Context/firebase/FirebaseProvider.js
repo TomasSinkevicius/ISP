@@ -62,7 +62,7 @@ const FirebaseProvider = ({ children }) => {
 
 	const getMovie = async (id) => {
 		let dataDoc = await database.collection('movies').get();
-		dataDoc = dataDoc.docs.filter((doc) => doc.data().id === id);
+		dataDoc = dataDoc.docs.filter((doc) => `${doc.data().id}` === `${id}`);
 		return dataDoc[0]?.data();
 	};
 
@@ -92,12 +92,23 @@ const FirebaseProvider = ({ children }) => {
 		return data;
 	};
 
+	const getRecommendedMovies = async () => {
+		let data = [];
+		let dataDoc = await database.collection('movies').get();
+		dataDoc.docs.map((doc) => (data = [...data, doc.data()]));
+		// xddddddddddddddddddddd
+		var item1 = data[Math.floor(Math.random() * data.length - 1)];
+		var item2 = data[Math.floor(Math.random() * data.length - 1)];
+		data = [item1, item2];
+		return data;
+	};
+
 	const setMembership = async () => {
 		let data = [];
 		let dataDoc = await database.collection('membership').get();
 		dataDoc.docs.map((doc) => (data = [...data, doc.data()]));
 		return data;
-	}
+	};
 
 	const removeMovie = async (id) => {};
 
@@ -172,6 +183,7 @@ const FirebaseProvider = ({ children }) => {
 				getMovie,
 				setMovie,
 				getAllMovies,
+				getRecommendedMovies,
 				removeMovie,
 				setMembership,
 			}}
