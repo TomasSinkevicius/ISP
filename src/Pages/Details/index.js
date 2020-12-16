@@ -22,10 +22,13 @@ const DetailsScreen = (props) => {
 		getRecommendedMovies,
 		user,
 		removeUserPoints,
+		addToFavorites,
+		removeFromFavorites,
 	} = useFirebase();
 
 	const [asset, setAsset] = useState({});
 	const [recommended, setRecommended] = useState([]);
+	const [isFavorite, setIsFavorite] = useState(false);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
@@ -34,10 +37,13 @@ const DetailsScreen = (props) => {
 			const recommendedRes = await getRecommendedMovies(res);
 			setAsset(res);
 			setRecommended(recommendedRes);
+			if (user?.favorites.find((item) => item === res.id)) {
+				setIsFavorite(true);
+			}
 			setLoading(false);
 		};
 		fetchData();
-	}, [location.pathname]);
+	}, [location.pathname, user]);
 
 	return loading ? null : (
 		<div
@@ -68,9 +74,27 @@ const DetailsScreen = (props) => {
 						>
 							Play
 						</Button>
-						<Button size='large' color='primary'>
-							Add to favorites
-						</Button>
+						{isFavorite ? (
+							<Button
+								onClick={() => {
+									removeFromFavorites(asset.id);
+								}}
+								size='large'
+								color='primary'
+							>
+								Remove from favorites
+							</Button>
+						) : (
+							<Button
+								onClick={() => {
+									addToFavorites(asset.id);
+								}}
+								size='large'
+								color='primary'
+							>
+								Add to favorites
+							</Button>
+						)}
 					</div>
 				</div>
 				<Comments />

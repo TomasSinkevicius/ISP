@@ -151,9 +151,20 @@ const FirebaseProvider = ({ children }) => {
 		return userObj;
 	};
 
-	const addToFavorites = async (id) => {};
+	const addToFavorites = async (id) => {
+		const userObj = { ...user, favorites: [...user.favorites, id] };
+		await database.collection('users').doc(`${user.uid}`).set(userObj);
+		setUser(userObj);
+	};
 
-	const removeFromFavorites = async (id) => {};
+	const removeFromFavorites = async (id) => {
+		const userObj = {
+			...user,
+			favorites: user.favorites.filter((item) => item !== id),
+		};
+		await database.collection('users').doc(`${user.uid}`).set(userObj);
+		setUser(userObj);
+	};
 
 	const register = (email, password, history) => {
 		const reg = auth.createUserWithEmailAndPassword(email, password);
