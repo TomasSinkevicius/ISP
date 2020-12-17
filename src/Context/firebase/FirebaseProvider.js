@@ -128,6 +128,18 @@ const FirebaseProvider = ({ children }) => {
 		setUser(userObj);
 	};
 
+	const setPhone = async (phone) => {
+		const userObj = { ...user, phone: phone};
+		await database.collection('users').doc(`${user.uid}`).set(userObj);
+		setUser(userObj);
+	};
+
+	const setCity = async (city) => {
+		const userObj = { ...user, city: city};
+		await database.collection('users').doc(`${user.uid}`).set(userObj);
+		setUser(userObj);
+	};
+
 	const removeUserPoints = async (points) => {
 		const userObj = { ...user, points: user.points - points };
 		await database.collection('users').doc(`${user.uid}`).set(userObj);
@@ -181,6 +193,8 @@ const FirebaseProvider = ({ children }) => {
 					points: 2,
 					favorites: [],
 					membership: 'paprasta',
+					phone: '',
+					city: '',
 				};
 				await database.collection('users').doc(uid).set(userObj);
 				setUser(userObj);
@@ -238,6 +252,8 @@ const FirebaseProvider = ({ children }) => {
 				getRecommendedMovies,
 				removeMovie,
 				setMembership,
+				setPhone,
+				setCity,
 			}}
 		>
 			{children}

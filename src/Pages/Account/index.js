@@ -27,16 +27,24 @@ const AccountScreen = (props) => {
 						<p className='account-info-content'>{user.email}</p>
 					</div>
 					<div className='account-info-holder'>
-						<h3 className='account-info-title'>Naudotojo taškai: </h3>
+						<h3 className='account-info-title'>Taškai: </h3>
 						<p className='account-info-content'>{user.points}</p>
 					</div>
 					<div className='account-info-holder'>
-						<h3 className='account-info-title'>Naudotojo tipas: </h3>
+						<h3 className='account-info-title'>Paskyros tipas: </h3>
 						<p className='account-info-content'>{user.type}</p>
 					</div>
 					<div className='account-info-holder'>
-						<h3 className='account-info-title'>Naudotojo narystė: </h3>
+						<h3 className='account-info-title'>Paskyros narystė: </h3>
 						<p className='account-info-content'>{user.membership}</p>
+					</div>
+					<div className='account-info-holder'>
+						<h3 className='account-info-title'>Telefono numeris: </h3>
+						<p className='account-info-content'>{user.phone}</p>
+					</div>
+					<div className='account-info-holder'>
+						<h3 className='account-info-title'>Miestas: </h3>
+						<p className='account-info-content'>{user.city}</p>
 					</div>
 					<div className='account-info-holder' onClick={routeChangeAdd}>
 						<h3 className='account-info-add-data'>Pridėti duomenis</h3>
