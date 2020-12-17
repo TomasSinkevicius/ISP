@@ -39,17 +39,17 @@ const DetailsScreen = (props) => {
 			setRecommended(recommendedRes);
 			if (user?.favorites.find((item) => item === res.id)) {
 				setIsFavorite(true);
-			}
+			} else setIsFavorite(false);
 			setLoading(false);
 		};
-		fetchData();
-	}, [location.pathname, user]);
+		if (user) fetchData();
+	}, [location.pathname, user, isFavorite]);
 
 	return loading ? null : (
 		<div
 			className='background-blur-wrapper'
 			style={{
-				backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)),url(${asset.backdrop})`,
+				backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 1)),url(${asset.backdrop})`,
 			}}
 		>
 			<Header />
@@ -77,7 +77,7 @@ const DetailsScreen = (props) => {
 						{isFavorite ? (
 							<Button
 								onClick={() => {
-									removeFromFavorites(asset.id);
+									removeFromFavorites(asset);
 								}}
 								size='large'
 								color='primary'
@@ -87,7 +87,7 @@ const DetailsScreen = (props) => {
 						) : (
 							<Button
 								onClick={() => {
-									addToFavorites(asset.id);
+									addToFavorites(asset);
 								}}
 								size='large'
 								color='primary'

@@ -157,18 +157,38 @@ const FirebaseProvider = ({ children }) => {
 		return userObj;
 	};
 
-	const addToFavorites = async (id) => {
-		const userObj = { ...user, favorites: [...user.favorites, id] };
+	const getFavoriteMovies = async () => {
+		let libraryDoc = await database.collection('users-favorites').get();
+		libraryDoc = libraryDoc.docs.filter((doc) => doc.data().uid === user.uid);
+		return libraryDoc[0]?.data().favorites;
+	};
+
+	const addToFavorites = async (movie) => {
+		const userObj = { ...user, favorites: [...user.favorites, movie.id] };
 		await database.collection('users').doc(`${user.uid}`).set(userObj);
+		const libraryData = await getFavoriteMovies();
+		await database
+			.collection('users-favorites')
+			.doc(`${user.uid}`)
+			.set({ uid: user.uid, favorites: [...libraryData, movie] });
 		setUser(userObj);
 	};
 
-	const removeFromFavorites = async (id) => {
+	const removeFromFavorites = async (movie) => {
 		const userObj = {
 			...user,
-			favorites: user.favorites.filter((item) => item !== id),
+			favorites: user.favorites.filter((item) => item !== movie.id),
 		};
 		await database.collection('users').doc(`${user.uid}`).set(userObj);
+		const libraryData = await getFavoriteMovies();
+		await database
+			.collection('users-favorites')
+			.doc(`${user.uid}`)
+			.set({
+				uid: user.uid,
+				favorites: libraryData.filter((item) => item.id !== movie.id),
+			});
+
 		setUser(userObj);
 	};
 
@@ -190,7 +210,12 @@ const FirebaseProvider = ({ children }) => {
 					phone: '',
 					city: '',
 				};
+				const libraryObj = {
+					uid,
+					favorites: [],
+				};
 				await database.collection('users').doc(uid).set(userObj);
+				await database.collection('users-favorites').doc(uid).set(libraryObj);
 				setUser(userObj);
 				history.push('/');
 			}
@@ -247,6 +272,7 @@ const FirebaseProvider = ({ children }) => {
 				removeMovie,
 				setMembership,
 				setUserInfo,
+				getFavoriteMovies,
 			}}
 		>
 			{children}
