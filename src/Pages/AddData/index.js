@@ -1,17 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useFirebase } from '../../Context/firebase/FirebaseContext.js';
 import Header from '../../Components/Header/header.js';
 
 const AddDataScreen = (props) => {
-	let phoneInput = React.createRef();
-	let cityInput = React.createRef();
+	const [phoneInput, setPhoneInput] = useState('');
+	const [cityInput, setCityInput] = useState('');
 	const { history } = props;
-	const { user, userLoading, setPhone, setCity } = useFirebase();
+	const { user, userLoading, setUserInfo } = useFirebase();
 
-	const addData = (phone, city) => {
-		setPhone(phone);
-		setCity(city);
+	const addData = () => {
+		setUserInfo({ phone: phoneInput, city: cityInput });
 		history.push(`/account/${user.uid}`);
 	};
 
@@ -21,28 +20,25 @@ const AddDataScreen = (props) => {
 			<div className='login-screen-container'>
 				<h1 className='login-screen-title'>Pridėti duomenis</h1>
 				<input
-					ref={phoneInput}
+					onChange={(e) => setPhoneInput(e.target.value)}
 					className='auth-input'
 					type='text'
 					name='phone'
 					placeholder='Telefono numeris'
 				/>
 				<input
-					ref={cityInput}
+					onChange={(e) => setCityInput(e.target.value)}
 					className='auth-input'
 					type='text'
 					name='city'
 					placeholder='Miestas'
 				/>
-				<button 
-				onClick={() => addData(phoneInput.current.value, cityInput.current.value)}
-				className='auth-primary-button' >
+				<button onClick={() => addData()} className='auth-primary-button'>
 					Išsaugoti
 				</button>
 			</div>
 		</div>
 	);
-
 };
 
 export default AddDataScreen;

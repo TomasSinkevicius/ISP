@@ -128,14 +128,8 @@ const FirebaseProvider = ({ children }) => {
 		setUser(userObj);
 	};
 
-	const setPhone = async (phone) => {
-		const userObj = { ...user, phone: phone};
-		await database.collection('users').doc(`${user.uid}`).set(userObj);
-		setUser(userObj);
-	};
-
-	const setCity = async (city) => {
-		const userObj = { ...user, city: city};
+	const setUserInfo = async (info) => {
+		const userObj = { ...user, ...info };
 		await database.collection('users').doc(`${user.uid}`).set(userObj);
 		setUser(userObj);
 	};
@@ -252,8 +246,7 @@ const FirebaseProvider = ({ children }) => {
 				getRecommendedMovies,
 				removeMovie,
 				setMembership,
-				setPhone,
-				setCity,
+				setUserInfo,
 			}}
 		>
 			{children}
