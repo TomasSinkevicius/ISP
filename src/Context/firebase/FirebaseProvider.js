@@ -147,14 +147,15 @@ const FirebaseProvider = ({ children }) => {
 		userDoc = userDoc.docs.filter((doc) => doc.data().uid === response.uid);
 
 		let userObj = userDoc[0]?.data();
-		const today = new Date().toLocaleDateString();
+		if (userObj) {
+			const today = new Date().toLocaleDateString();
 
-		if (today !== userObj.timestamp) {
-			userObj = { ...userObj, timestamp: today, points: userObj.points + 2 };
-			await database.collection('users').doc(userObj.uid).set(userObj);
-		}
-
-		return userObj;
+			if (today !== userObj.timestamp) {
+				userObj = { ...userObj, timestamp: today, points: userObj.points + 2 };
+				await database.collection('users').doc(userObj.uid).set(userObj);
+			}
+			return userObj;
+		} else return null;
 	};
 
 	const getFavoriteMovies = async () => {
