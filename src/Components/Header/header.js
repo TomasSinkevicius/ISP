@@ -24,6 +24,9 @@ const Header = () => {
 			<a className='header__top-nav-item' href='/forum'>
 				Forumas
 			</a>
+			<a className='header__top-nav-item' href='/admin'>
+				Admin
+			</a>
 			<figure className='header__top-nav-item user-profile-widget'>
 				<a href={`/account/${user.uid}`}>
 					<img src={UserProfileWidget} alt='user profile' />
