@@ -142,6 +142,7 @@ const FirebaseProvider = ({ children }) => {
 
 	const removeMovie = async (id) => {
  		database.collection('movies').delete(id);
+ 		database.update();
 	};
 
 	const getUserObject = async (response) => {

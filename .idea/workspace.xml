@@ -3,15 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d51c5fb2-2f38-4e19-afcb-3d29c27fb30d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Context/firebase/FirebaseProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Context/firebase/FirebaseProvider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Admin/Components/FilmuIstrinimas.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Admin/Components/FilmuPridejimas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Admin/Components/AddMovie.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Admin/Components/FilmuRedagavimas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Admin/Components/Edit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Admin/Components/VartotojuAtblokavimas.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Admin/Components/VartotojuBlokavimas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Admin/Components/Ban.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Admin/Components/VartotojuUztildymas.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Admin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Admin/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +57,7 @@
       <workItem from="1608395450615" duration="612000" />
       <workItem from="1608462619523" duration="6689000" />
       <workItem from="1608479651709" duration="5451000" />
+      <workItem from="1608486074380" duration="99000" />
     </task>
     <servers />
   </component>
@@ -100,7 +93,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/Pages/PointsPurchase/index.js</url>
           <line>9</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
