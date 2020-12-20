@@ -140,7 +140,9 @@ const FirebaseProvider = ({ children }) => {
 		setUser(userObj);
 	};
 
-	const removeMovie = async (id) => {};
+	const removeMovie = async (id) => {
+ 		database.collection('movies').delete(id);
+	};
 
 	const getUserObject = async (response) => {
 		let userDoc = await database.collection('users').get();
