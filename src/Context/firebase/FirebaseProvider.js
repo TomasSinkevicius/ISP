@@ -275,10 +275,10 @@ const FirebaseProvider = ({ children }) => {
         console.error("Error removing document: ", error);
       });
   };
-  const editComment = (id) => {
+  const editComment = (value, id) => {
     var comment = database.collection("comments").doc(id);
     comment.update({
-      body: "Pakeistas komentaras1",
+      body: value,
     });
   };
   const increaseCommentRating = (id, rating) => {

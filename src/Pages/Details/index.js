@@ -54,7 +54,7 @@ const DetailsScreen = (props) => {
       setLoading(false);
     };
     if (user) fetchData();
-  }, [location.pathname, user, isFavorite]);
+  }, [commentData, location.pathname, user, isFavorite]);
 
   return loading ? null : (
     <div

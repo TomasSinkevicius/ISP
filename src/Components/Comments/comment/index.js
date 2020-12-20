@@ -5,6 +5,7 @@ import TrashBin from "../../../assets/images/trash-bin.png";
 import Edit from "../../../assets/images/edit.png";
 import Plus from "../../../assets/images/plus.png";
 import { useFirebase } from "../../../Context/firebase/FirebaseContext.js";
+import EditComment from "../editComment/index.js";
 import Reply from "../reply.js";
 
 const Comment = (props) => {
@@ -16,7 +17,7 @@ const Comment = (props) => {
     decreaseCommentRating,
     giveUserPoints,
   } = useFirebase();
-  const [rating, setRating] = useState(false);
+  const [commentInputOpen, setCommentInputOpen] = useState(false);
   const deleteCom = (id) => {
     deleteComment(id);
     // window.location.reload();
@@ -60,14 +61,20 @@ const Comment = (props) => {
             </button>
             <button
               className="comment-button"
-              onClick={() => editComment(props.id)}
+              onClick={() => setCommentInputOpen(!commentInputOpen)}
             >
               <img src={Edit} alt="user profile" />
             </button>
           </div>
         )}
       </div>
-      <div className="comment-text">{props.body}</div>
+      <div className="comment-text">
+        {commentInputOpen == false ? (
+          props.body
+        ) : (
+          <EditComment id={props.id} value={props.body} />
+        )}
+      </div>
       {user.email == props.user_email ? (
         <>
           <div className="comment-author">{props.reply_user_email}</div>

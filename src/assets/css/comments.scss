@@ -120,7 +120,8 @@
 }
 .comment {
   background-color: rgb(56, 55, 55);
-  height: 70px;
+  min-height: 70px;
+  max-height: 400px;
   margin-top: 10px;
   padding: 5px;
   &__header {
