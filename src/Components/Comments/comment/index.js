@@ -20,7 +20,6 @@ const Comment = (props) => {
   const [commentInputOpen, setCommentInputOpen] = useState(false);
   const deleteCom = (id) => {
     deleteComment(id);
-    // window.location.reload();
     alert("Ar tikrai norite istrinti?");
   };
 
