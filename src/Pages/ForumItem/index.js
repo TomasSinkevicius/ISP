@@ -72,7 +72,7 @@ const ForumItemScreen = () => {
 								<h3
 									onClick={() => history.push({
 										pathname : `/forumthread/1`,
-										state: item.theme	
+										state: item.author	
 										})}
 									className='forum-section-link'
 								>

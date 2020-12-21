@@ -39,7 +39,7 @@ const ForumThreadScreen = () => {
 
 			for(let thread of res)
 			{
-				if(thread.theme == name)
+				if(thread.author == name)
 				{
 					neWd.push(thread)
 				}
