@@ -6,14 +6,14 @@ const Wrapper = styled.div`
     
 `
 
-const FilmuPridejimas = () => {
+const Edit = () => {
     return (
         <Wrapper>
             <form>
-                <p>Filmų pridėjimas</p>
+                <p>Filmų redagavimas</p>
             </form>
         </Wrapper>
     )
 }
 
-export default FilmuPridejimas;
+export default Edit;
