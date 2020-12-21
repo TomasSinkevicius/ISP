@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="d51c5fb2-2f38-4e19-afcb-3d29c27fb30d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Header/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Header/header.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Context/firebase/FirebaseProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Context/firebase/FirebaseProvider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Admin/Components/AddMovie.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Admin/Components/AddMovie.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Admin/Components/Ban.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Admin/Components/Ban.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Admin/Components/Edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Admin/Components/Edit.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
