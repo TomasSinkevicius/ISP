@@ -104,6 +104,18 @@ const FirebaseProvider = ({ children }) => {
 		dataDoc.docs.map((doc) => (data = [...data, doc.data()]));
 		return data;
 	};
+	const getAllCommentReplies = async () => {
+		let data = [];
+		let dataDoc = await database.collection('comments-replies').get();
+		dataDoc.docs.map((doc) => (data = [...data, doc.data()]));
+		return data;
+	};
+	const getAllComments = async () => {
+		let data = [];
+		let dataDoc = await database.collection('comments').get();
+		dataDoc.docs.map((doc) => (data = [...data, doc.data()]));
+		return data;
+	};
 
 	const getRecommendedMovies = async () => {
 		let data = [];
@@ -127,6 +139,13 @@ const FirebaseProvider = ({ children }) => {
 		await database.collection('users').doc(`${user.uid}`).set(userObj);
 		setUser(userObj);
 	};
+	const giveUserPoints = async (user_id, user_points) => {
+		var user = database.collection('users').doc(user_id);
+		alert(user_points);
+		user.update({
+			points: user_points + 10,
+		});
+	};
 
 	const setUserInfo = async (info) => {
 		const userObj = { ...user, ...info };
@@ -140,10 +159,7 @@ const FirebaseProvider = ({ children }) => {
 		setUser(userObj);
 	};
 
-	const removeMovie = async (id) => {
- 		database.collection('movies').delete(id);
- 		database.update();
-	};
+	const removeMovie = async (id) => {};
 
 	const getUserObject = async (response) => {
 		let userDoc = await database.collection('users').get();
@@ -225,6 +241,58 @@ const FirebaseProvider = ({ children }) => {
 			}
 		});
 	};
+	const addComment = (body, id, user_email, user_id) => {
+		var newComment = database.collection('comments').doc();
+		newComment.set({
+			id: newComment.id,
+			body: body,
+			movie_id: id,
+			rating: 0,
+			user_email: user_email,
+			author_id: user_id,
+		});
+	};
+	const replyComment = (body, id, user_email, comment_id) => {
+		var newComment = database.collection('comments-replies').doc();
+		newComment.set({
+			id: newComment.id,
+			comment_id: comment_id,
+			body: body,
+			movie_id: id,
+			rating: 0,
+			user_email: user_email,
+		});
+	};
+	const deleteComment = (id) => {
+		database
+			.collection('comments')
+			.doc(id)
+			.delete()
+			.then(function () {
+				console.log('Document successfully deleted!');
+			})
+			.catch(function (error) {
+				console.error('Error removing document: ', error);
+			});
+	};
+	const editComment = (value, id) => {
+		var comment = database.collection('comments').doc(id);
+		comment.update({
+			body: value,
+		});
+	};
+	const increaseCommentRating = (id, rating) => {
+		var comment = database.collection('comments').doc(id);
+		comment.update({
+			rating: rating + 1,
+		});
+	};
+	const decreaseCommentRating = (id, rating) => {
+		var comment = database.collection('comments').doc(id);
+		comment.update({
+			rating: rating - 1,
+		});
+	};
 
 	const login = (email, password, history) => {
 		const log = auth.signInWithEmailAndPassword(email, password);
@@ -277,6 +345,15 @@ const FirebaseProvider = ({ children }) => {
 				setMembership,
 				setUserInfo,
 				getFavoriteMovies,
+				getAllComments,
+				addComment,
+				deleteComment,
+				editComment,
+				increaseCommentRating,
+				decreaseCommentRating,
+				replyComment,
+				getAllCommentReplies,
+				giveUserPoints,
 			}}
 		>
 			{children}
