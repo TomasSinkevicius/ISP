@@ -73,13 +73,32 @@ function AdminScreen() {
                 <h1 style={{textAlign: 'center'}}>Admin panelė</h1>
                 <button
                     onClick={() => history.push(`/admin/add`)}
-                    style={{marginLeft: '300px', fontSize: '22px', borderWidth: '2px', marginBottom: '10px'}}
+                    style={{
+                        marginLeft: '300px',
+                        borderWidth: '2px',
+                        marginBottom: '10px',
+                        backgroundColor: '#008CBA',
+                        color: 'white',
+                        padding: '10px 28px',
+                        textAlign: 'center',
+                        textDecoration: 'none',
+                        display: 'inline-block',
+                        fontSize: '16px'}}
                 >Prideti filmą
                 </button>
                 <br/>
                 <button
                     onClick={() => history.push(`/admin/ban`)}
-                    style={{marginLeft: '300px', fontSize: '22px', borderWidth: '2px', marginBottom: '10px'}}
+                    style={{
+                        marginLeft: '300px',
+                        borderWidth: '2px',
+                        backgroundColor: '#008CBA',
+                        color: 'white',
+                        padding: '10px 28px',
+                        textAlign: 'center',
+                        textDecoration: 'none',
+                        display: 'inline-block',
+                        fontSize: '16px'}}
                 >Blokuoti/Atblokuoti/Užtildyti vartotojus
                 </button>
                 {/* Hero unit */}
@@ -108,7 +127,7 @@ function AdminScreen() {
                                         <Button
                                             size='small'
                                             color='primary'
-                                            onClick={() => removeMovie(item.id)}
+                                            onClick={() => removeMovie(item.id.toString())}
                                         >
                                             Panaikinti
                                         </Button>

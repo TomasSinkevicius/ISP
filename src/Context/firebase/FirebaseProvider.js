@@ -66,6 +66,20 @@ const FirebaseProvider = ({ children }) => {
 		return dataDoc[0]?.data();
 	};
 
+	const addMovie = async (id) => {
+		database.collection("movies").doc(id).set({
+			name: "Los Angeles",
+			state: "CA",
+			country: "USA"
+		})
+			.then(function() {
+				console.log("Document successfully written!");
+			})
+			.catch(function(error) {
+				console.error("Error writing document: ", error);
+			});
+	}
+
 	const getMedia = async (item) => {
 		let videoRes = await videoProvider(item.id);
 		videoRes = videoRes?.results?.find((item) => item.type === 'Trailer');
@@ -159,7 +173,13 @@ const FirebaseProvider = ({ children }) => {
 		setUser(userObj);
 	};
 
-	const removeMovie = async (id) => {};
+	const removeMovie = async (id) => {
+		database.collection("movies").doc(id).delete().then(function() {
+			console.log("Document successfully deleted!");
+		}).catch(function(error) {
+			console.error("Error removing document: ", error);
+		});
+	};
 
 	const getUserObject = async (response) => {
 		let userDoc = await database.collection('users').get();

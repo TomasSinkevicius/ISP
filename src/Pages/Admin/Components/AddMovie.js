@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components"
 
+import {useHistory} from 'react-router-dom';
+
 const Wrapper = styled.div`
     font-size: 12;
     margin-top: 100px;
@@ -8,10 +10,12 @@ const Wrapper = styled.div`
     margin-right: 200px;
     `
 const AddMovie = () => {
+    const history = useHistory();
     return (
         <Wrapper>
             <h1 style={{textAlign: 'center'}}>Filmo pridėjimas</h1>
             <form class="forma">
+                <input type="uid" placeholder="doc id"/>
                 <label for="adult">Filmo suagusiems: </label>
                 <select id="adult" name="adult">
                     <option value="true">Taip</option>
@@ -61,7 +65,7 @@ const AddMovie = () => {
                 <br/>
                 <input type="text" placeholder="Balsavimu skaicius"/>
                 <br/>
-                <input type="submit" value="Pridėti filmą"/>
+                <input type="submit" value="Pridėti filmą" onClick={() => {history.push('/admin')}}/>
             </form>
         </Wrapper>
     )
