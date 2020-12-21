@@ -6,6 +6,8 @@ import Edit from "../../../assets/images/edit.png";
 import Plus from "../../../assets/images/plus.png";
 import { useFirebase } from "../../../Context/firebase/FirebaseContext.js";
 import EditComment from "../editComment/index.js";
+import UserProfileWidget from "../../../assets/images/placeholder-profile.jpg";
+
 import Reply from "../reply.js";
 
 const Comment = (props) => {
@@ -20,14 +22,18 @@ const Comment = (props) => {
   const [commentInputOpen, setCommentInputOpen] = useState(false);
   const deleteCom = (id) => {
     deleteComment(id);
-    // window.location.reload();
     alert("Ar tikrai norite istrinti?");
   };
 
   return (
     <div className="comment">
       <div className="comment__header">
-        <div className="comment__author">{props.user_email}</div>
+        <div className="comment__author">
+          <figure className="comment__user-profile-widget">
+            <img src={UserProfileWidget} alt="user profile" />
+          </figure>
+          {props.user_email}
+        </div>
         {user.email != props.user_email ? (
           <div className="rating">
             <button
@@ -52,6 +58,13 @@ const Comment = (props) => {
           </div>
         ) : (
           <div>
+            <button className="comment-button">
+              <img src={Like} alt="user profile" />
+            </button>
+            <span>{props.rating}</span>
+            <button className="comment-button">
+              <img src={DisLike} alt="user profile" />
+            </button>
             <button
               className="comment-button"
               type="button"

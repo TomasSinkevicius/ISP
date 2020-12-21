@@ -66,20 +66,6 @@ const FirebaseProvider = ({ children }) => {
 		return dataDoc[0]?.data();
 	};
 
-	const addMovie = async (id) => {
-		database.collection("movies").doc(id).set({
-			name: "Los Angeles",
-			state: "CA",
-			country: "USA"
-		})
-			.then(function() {
-				console.log("Document successfully written!");
-			})
-			.catch(function(error) {
-				console.error("Error writing document: ", error);
-			});
-	}
-
 	const getMedia = async (item) => {
 		let videoRes = await videoProvider(item.id);
 		videoRes = videoRes?.results?.find((item) => item.type === 'Trailer');
@@ -111,23 +97,6 @@ const FirebaseProvider = ({ children }) => {
 			await database.collection('movies').doc(`${id}`).set(movieObj);
 		} else return;
 	};
-
-	function listAllUsers() {
-		// List batch of users, 1000 at a time.
-		database.auth().listUsers(1000)
-			.then(function (listUsersResult) {
-				listUsersResult.users.forEach(function (userRecord) {
-					console.log('user', userRecord.toJSON());
-				});
-				if (listUsersResult.pageToken) {
-					// List next batch of users.
-					listAllUsers(listUsersResult.pageToken);
-				}
-			})
-			.catch(function (error) {
-				console.log('Error listing users:', error);
-			});
-	}
 
 	const getAllMovies = async () => {
 		let data = [];
@@ -172,10 +141,16 @@ const FirebaseProvider = ({ children }) => {
 	};
 	const giveUserPoints = async (user_id, user_points) => {
 		var user = database.collection('users').doc(user_id);
-		alert(user_points);
-		user.update({
-			points: user_points + 10,
-		});
+		user
+			.update({
+				points: user_points + 10,
+			})
+			.then(function () {
+				console.log('Points succesfully given!');
+			})
+			.catch(function (error) {
+				console.error('Error giving points: ', error);
+			});
 	};
 
 	const setUserInfo = async (info) => {
@@ -190,13 +165,7 @@ const FirebaseProvider = ({ children }) => {
 		setUser(userObj);
 	};
 
-	const removeMovie = async (id) => {
-		database.collection("movies").doc(id).delete().then(function() {
-			console.log("Document successfully deleted!");
-		}).catch(function(error) {
-			console.error("Error removing document: ", error);
-		});
-	};
+	const removeMovie = async (id) => {};
 
 	const getUserObject = async (response) => {
 		let userDoc = await database.collection('users').get();
@@ -280,25 +249,39 @@ const FirebaseProvider = ({ children }) => {
 	};
 	const addComment = (body, id, user_email, user_id) => {
 		var newComment = database.collection('comments').doc();
-		newComment.set({
-			id: newComment.id,
-			body: body,
-			movie_id: id,
-			rating: 0,
-			user_email: user_email,
-			author_id: user_id,
-		});
+		newComment
+			.set({
+				id: newComment.id,
+				body: body,
+				movie_id: id,
+				rating: 0,
+				user_email: user_email,
+				author_id: user_id,
+			})
+			.then(function () {
+				console.log('Comment successfully written!');
+			})
+			.catch(function (error) {
+				console.error('Error writing comment: ', error);
+			});
 	};
 	const replyComment = (body, id, user_email, comment_id) => {
 		var newComment = database.collection('comments-replies').doc();
-		newComment.set({
-			id: newComment.id,
-			comment_id: comment_id,
-			body: body,
-			movie_id: id,
-			rating: 0,
-			user_email: user_email,
-		});
+		newComment
+			.set({
+				id: newComment.id,
+				comment_id: comment_id,
+				body: body,
+				movie_id: id,
+				rating: 0,
+				user_email: user_email,
+			})
+			.then(function () {
+				console.log('Successfully replied!');
+			})
+			.catch(function (error) {
+				console.error('Error replying: ', error);
+			});
 	};
 	const deleteComment = (id) => {
 		database
@@ -310,25 +293,52 @@ const FirebaseProvider = ({ children }) => {
 			})
 			.catch(function (error) {
 				console.error('Error removing document: ', error);
+			})
+			.then(function () {
+				console.log('Comment successfuly deleted!');
+			})
+			.catch(function (error) {
+				console.error('Error deleting comment: ', error);
 			});
 	};
 	const editComment = (value, id) => {
 		var comment = database.collection('comments').doc(id);
-		comment.update({
-			body: value,
-		});
+		comment
+			.update({
+				body: value,
+			})
+			.then(function () {
+				console.log('Comment successfuly edited!');
+			})
+			.catch(function (error) {
+				console.error('Error editing comment: ', error);
+			});
 	};
 	const increaseCommentRating = (id, rating) => {
 		var comment = database.collection('comments').doc(id);
-		comment.update({
-			rating: rating + 1,
-		});
+		comment
+			.update({
+				rating: rating + 1,
+			})
+			.then(function () {
+				console.log('Comment rating successfuly increased!');
+			})
+			.catch(function (error) {
+				console.error('Error increasing comment rating: ', error);
+			});
 	};
 	const decreaseCommentRating = (id, rating) => {
 		var comment = database.collection('comments').doc(id);
-		comment.update({
-			rating: rating - 1,
-		});
+		comment
+			.update({
+				rating: rating - 1,
+			})
+			.then(function () {
+				console.log('Comment rating successfuly decreased!');
+			})
+			.catch(function (error) {
+				console.error('Error decreasing comment rating: ', error);
+			});
 	};
 
 	const login = (email, password, history) => {
@@ -391,7 +401,6 @@ const FirebaseProvider = ({ children }) => {
 				replyComment,
 				getAllCommentReplies,
 				giveUserPoints,
-				listAllUsers,
 			}}
 		>
 			{children}

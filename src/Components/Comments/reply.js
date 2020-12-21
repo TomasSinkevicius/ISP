@@ -6,7 +6,7 @@ const ReplyComment = (props) => {
   const add = (body, id, user_email, comment_id) => {
     replyComment(body, id, user_email, comment_id);
     // window.location.reload();
-    alert("Sekmingai pakomentuota");
+    alert("Sekmingai atsakyta į komentarą");
   };
   const [value, setValue] = useState(props.body);
 
