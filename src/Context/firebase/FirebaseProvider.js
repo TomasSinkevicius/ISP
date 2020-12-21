@@ -121,7 +121,6 @@ const FirebaseProvider = ({ children }) => {
 		let data = [];
 		let dataDoc = await database.collection('movies').get();
 		dataDoc.docs.map((doc) => (data = [...data, doc.data()]));
-		// xddddddddddddddddddddd
 		var item1 = data[Math.floor(Math.random() * data.length - 1)];
 		var item2 = data[Math.floor(Math.random() * data.length - 1)];
 		data = [item1, item2];
@@ -146,10 +145,10 @@ const FirebaseProvider = ({ children }) => {
 				points: user_points + 10,
 			})
 			.then(function () {
-				console.log('Points succesfully given!');
+				alert('Points succesfully given!');
 			})
 			.catch(function (error) {
-				console.error('Error giving points: ', error);
+				alert('Error giving points: ', error);
 			});
 	};
 
@@ -171,10 +170,10 @@ const FirebaseProvider = ({ children }) => {
 			.doc(id)
 			.delete()
 			.then(function () {
-				console.log('Document successfully deleted!');
+				alert('Document successfully deleted!');
 			})
 			.catch(function (error) {
-				console.error('Error removing document: ', error);
+				alert('Error removing document: ', error);
 			});
 	};
 
@@ -232,7 +231,7 @@ const FirebaseProvider = ({ children }) => {
 	const register = (email, password, history) => {
 		const reg = auth.createUserWithEmailAndPassword(email, password);
 		reg.catch((e) => {
-			return e.message;
+			alert(e.message);
 		});
 		auth.onAuthStateChanged(async (firebaseUser) => {
 			if (firebaseUser) {
@@ -270,10 +269,10 @@ const FirebaseProvider = ({ children }) => {
 				author_id: user_id,
 			})
 			.then(function () {
-				console.log('Comment successfully written!');
+				alert('Comment successfully written!');
 			})
 			.catch(function (error) {
-				console.error('Error writing comment: ', error);
+				alert('Error writing comment: ', error);
 			});
 	};
 	const replyComment = (body, id, user_email, comment_id) => {
@@ -288,10 +287,10 @@ const FirebaseProvider = ({ children }) => {
 				user_email: user_email,
 			})
 			.then(function () {
-				console.log('Successfully replied!');
+				alert('Successfully replied!');
 			})
 			.catch(function (error) {
-				console.error('Error replying: ', error);
+				alert('Error replying: ', error);
 			});
 	};
 	const deleteComment = (id) => {
@@ -300,16 +299,10 @@ const FirebaseProvider = ({ children }) => {
 			.doc(id)
 			.delete()
 			.then(function () {
-				console.log('Document successfully deleted!');
+				alert('Document successfully deleted!');
 			})
 			.catch(function (error) {
-				console.error('Error removing document: ', error);
-			})
-			.then(function () {
-				console.log('Comment successfuly deleted!');
-			})
-			.catch(function (error) {
-				console.error('Error deleting comment: ', error);
+				alert('Error removing document: ', error);
 			});
 	};
 	const editComment = (value, id) => {
@@ -319,10 +312,10 @@ const FirebaseProvider = ({ children }) => {
 				body: value,
 			})
 			.then(function () {
-				console.log('Comment successfuly edited!');
+				alert('Comment successfuly edited!');
 			})
 			.catch(function (error) {
-				console.error('Error editing comment: ', error);
+				alert('Error editing comment: ', error);
 			});
 	};
 	const increaseCommentRating = (id, rating) => {
@@ -332,10 +325,10 @@ const FirebaseProvider = ({ children }) => {
 				rating: rating + 1,
 			})
 			.then(function () {
-				console.log('Comment rating successfuly increased!');
+				alert('Comment rating successfuly increased!');
 			})
 			.catch(function (error) {
-				console.error('Error increasing comment rating: ', error);
+				alert('Error increasing comment rating: ', error);
 			});
 	};
 	const decreaseCommentRating = (id, rating) => {
@@ -345,17 +338,17 @@ const FirebaseProvider = ({ children }) => {
 				rating: rating - 1,
 			})
 			.then(function () {
-				console.log('Comment rating successfuly decreased!');
+				alert('Comment rating successfuly decreased!');
 			})
 			.catch(function (error) {
-				console.error('Error decreasing comment rating: ', error);
+				alert('Error decreasing comment rating: ', error);
 			});
 	};
 
 	const login = (email, password, history) => {
 		const log = auth.signInWithEmailAndPassword(email, password);
 		log.catch((e) => {
-			return e.message;
+			alert(e.message);
 		});
 		auth.onAuthStateChanged(async (firebaseUser) => {
 			if (firebaseUser) {
