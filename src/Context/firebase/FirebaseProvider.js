@@ -165,7 +165,18 @@ const FirebaseProvider = ({ children }) => {
 		setUser(userObj);
 	};
 
-	const removeMovie = async (id) => {};
+	const removeMovie = async (id) => {
+		database
+			.collection('movies')
+			.doc(id)
+			.delete()
+			.then(function () {
+				console.log('Document successfully deleted!');
+			})
+			.catch(function (error) {
+				console.error('Error removing document: ', error);
+			});
+	};
 
 	const getUserObject = async (response) => {
 		let userDoc = await database.collection('users').get();
