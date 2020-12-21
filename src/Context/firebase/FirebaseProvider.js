@@ -105,6 +105,20 @@ const FirebaseProvider = ({ children }) => {
 		return data;
 	};
 
+	const getAllThemes = async () => {
+		let data = [];
+		let dataDoc = await database.collection('themes').get();
+		dataDoc.docs.map((doc) => (data = [...data, doc.data()]));
+		return data;
+	};
+
+	const getAllThreads = async () => {
+		let data = [];
+		let dataDoc = await database.collection('threads').get();
+		dataDoc.docs.map((doc) => (data = [...data, doc.data()]));
+		return data;
+	};
+
 	const getRecommendedMovies = async () => {
 		let data = [];
 		let dataDoc = await database.collection('movies').get();
@@ -269,6 +283,8 @@ const FirebaseProvider = ({ children }) => {
 				getMovie,
 				setMovie,
 				getAllMovies,
+				getAllThemes,
+				getAllThreads,
 				getRecommendedMovies,
 				removeMovie,
 				setMembership,

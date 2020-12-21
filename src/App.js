@@ -23,6 +23,8 @@ import RegisterScreen from './Pages/Register';
 import AccountScreen from './Pages/Account';
 import ForumScreen from './Pages/Forum';
 import ForumItemScreen from './Pages/ForumItem';
+import AddThreadScreen from './Pages/AddThread';
+import ForumThreadScreen from './Pages/ForumThread';
 import MembeshipScreen	from './Pages/MembershipPurchase';
 import PointsScreen from './Pages/PointsPurchase';
 import AddDataScreen from './Pages/AddData';
@@ -58,6 +60,18 @@ const App = () => {
 					path='/forum/:id'
 					component={(props) => <ForumItemScreen {...props} />}
 				/>
+				<Route
+					exact
+					path='/forumthread/:id'
+					component={(props) => <ForumThreadScreen {...props} />}
+				/>
+
+				<Route
+					exact
+					path='/addthread/:id'
+					component={(props) => <AddThreadScreen {...props} />}
+				/>
+
 				<Route
 					exact
 					path='/account/:id'
