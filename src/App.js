@@ -28,6 +28,9 @@ import PointsScreen from './Pages/PointsPurchase';
 import AddDataScreen from './Pages/AddData';
 import EditDataScreen from './Pages/EditData';
 import AdminScreen from "./Pages/Admin";
+import AddMovie from "./Pages/Admin/Components/AddMovie";
+import Edit from "./Pages/Admin/Components/Edit"
+import Ban from "./Pages/Admin/Components/Ban"
 
 const App = () => {
 	return (
@@ -108,7 +111,21 @@ const App = () => {
 					path='/admin'
 					component={(props) => <AdminScreen	 {...props} />}
 				/>
-				EditDataScreen
+				<Route
+					exact
+					path='/admin/add'
+					component={(props) => <AddMovie	 {...props} />}
+				/>
+				<Route
+					exact
+					path='/admin/edit'
+					component={(props) => <Edit	 {...props} />}
+				/>
+				<Route
+					exact
+					path='/admin/ban'
+					component={(props) => <Ban	 {...props} />}
+				/>
 			</Switch>
 		</Router>
 	);
