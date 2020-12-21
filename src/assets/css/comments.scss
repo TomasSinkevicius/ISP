@@ -96,6 +96,8 @@
   &__author {
     font-size: 15px;
     margin-left: 10px;
+    display: flex;
+    flex-direction: row;
   }
   &__text {
     font-size: 10px;
@@ -117,6 +119,13 @@
     margin-top: 10px;
     width: 100px;
   }
+  &__user-profile-widget img {
+    border-radius: 50%;
+    height: 20px;
+    object-fit: cover;
+    width: 20px;
+    margin-right: 5px;
+  }
 }
 .comment {
   background-color: rgb(56, 55, 55);
@@ -130,6 +139,15 @@
     justify-content: space-between;
   }
   &__author {
+    display: flex;
+    flex-direction: row;
     font-size: 25px;
+  }
+  &__user-profile-widget img {
+    border-radius: 50%;
+    height: 30px;
+    object-fit: cover;
+    width: 30px;
+    margin-right: 5px;
   }
 }
