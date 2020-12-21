@@ -8,6 +8,34 @@ const Wrapper = styled.div`
     margin-top: 100px;
     margin-left: 200px;
     margin-right: 200px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    input[type=text], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .btn{
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .btn:hover {
+        background-color: #45a049;
+        opacity: 1.2;
+}
+
+}
     `
 const AddMovie = () => {
     const history = useHistory();
@@ -15,8 +43,9 @@ const AddMovie = () => {
         <Wrapper>
             <h1 style={{textAlign: 'center'}}>Filmo pridėjimas</h1>
             <form class="forma">
-                <input type="uid" placeholder="doc id"/>
-                <label for="adult">Filmo suagusiems: </label>
+                <input type="text" placeholder="doc id"/>
+                <br/>
+                <label for="adult">Filmas suagusiems: </label>
                 <select id="adult" name="adult">
                     <option value="true">Taip</option>
                     <option value="false">Ne</option>
@@ -41,7 +70,7 @@ const AddMovie = () => {
                 <br/>
                 <input type="text" placeholder="Pilnas pavadinimas"/>
                 <br/>
-                <input style={{width: '400px', height: '100px', marginTop: '10px'}}type="text" placeholder="Filmo aprašymas"/>
+                <input type="text" placeholder="Filmo aprašymas"/>
                 <br/>
                 <input type="text" placeholder="Populiarumas"/>
                 <br/>
@@ -65,7 +94,7 @@ const AddMovie = () => {
                 <br/>
                 <input type="text" placeholder="Balsavimu skaicius"/>
                 <br/>
-                <input type="submit" value="Pridėti filmą" onClick={() => {history.push('/admin')}}/>
+                <input class="btn" type="submit" value="Pridėti filmą" onClick={() => {history.push('/admin'); alert("Filmas pridėtas")}}/>
             </form>
         </Wrapper>
     )

@@ -7,6 +7,15 @@ import UserProfileWidget from '../../assets/images/placeholder-profile.jpg';
 const Header = () => {
 	const { user, userLoading } = useFirebase();
 
+	const isAdmin = () => {
+		if( user.type == 'admin') {
+			return(
+			<a className='header__top-nav-item' href='/admin'>
+				Admin
+			</a>
+			)
+		}
+	}
 	const UserHeader = () => (
 		<div className='header__top-nav'>
 			<a className='header__top-nav-item' href={`/naryste/${user.uid}`}>
@@ -24,9 +33,7 @@ const Header = () => {
 			<a className='header__top-nav-item' href='/forum'>
 				Forumas
 			</a>
-			<a className='header__top-nav-item' href='/admin'>
-				Admin
-			</a>
+			{isAdmin()}
 			<figure className='header__top-nav-item user-profile-widget'>
 				<a href={`/account/${user.uid}`}>
 					<img src={UserProfileWidget} alt='user profile' />

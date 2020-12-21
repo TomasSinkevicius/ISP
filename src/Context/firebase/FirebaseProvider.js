@@ -112,6 +112,23 @@ const FirebaseProvider = ({ children }) => {
 		} else return;
 	};
 
+	function listAllUsers() {
+		// List batch of users, 1000 at a time.
+		database.auth().listUsers(1000)
+			.then(function (listUsersResult) {
+				listUsersResult.users.forEach(function (userRecord) {
+					console.log('user', userRecord.toJSON());
+				});
+				if (listUsersResult.pageToken) {
+					// List next batch of users.
+					listAllUsers(listUsersResult.pageToken);
+				}
+			})
+			.catch(function (error) {
+				console.log('Error listing users:', error);
+			});
+	}
+
 	const getAllMovies = async () => {
 		let data = [];
 		let dataDoc = await database.collection('movies').get();
@@ -374,6 +391,7 @@ const FirebaseProvider = ({ children }) => {
 				replyComment,
 				getAllCommentReplies,
 				giveUserPoints,
+				listAllUsers,
 			}}
 		>
 			{children}
